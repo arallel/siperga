@@ -7,11 +7,8 @@ apabila mencari berdasarkan hari maka get where input hari tersebut
 apabila ketiganya null maka mengambil semua data peminjaman
 apabila di suatu data berisi data null maka akan mengembalikan dengan alert tidak ada data
 
-validasi apabila tidak memilih type file maka tidak dapat export
 
 ubah tombol status menjadi modal
-
-mencari untuk menampilkan dengan mencari berdasarkan judul,penerbit 
 
 cara update data excel
 
@@ -19,17 +16,17 @@ tombol menghapus semua data
 
 (tambahan dari pak dony)
 
-status kondisi buku yang ada di database
+status kondisi buku yang ada di database V
 
-delete di hapus diganti edit dan detail aja
+delete di hapus diganti edit dan detail aja V
 
-crud status semua dan di filter dengan select input yang akan digunakan di entry bagian mana
+crud status semua dan di filter dengan select input yang akan digunakan di entry bagian mana : kurang kejelasan
 
-import excel siswa untuk peminjaman buku
+import excel siswa untuk peminjaman buku : tidak ada data valid 
 
-barcode buku
+barcode buku V
 
-status buku rusak,hilang,bagus
+status buku rusak,hilang,bagus V
 
 bedakan tabel buku rusak dengan yang baik
 
@@ -37,22 +34,18 @@ pilih buku (by judul buku dan by nomer buku)
 
 barcode buku nomer belakangnya harus ada nomer urut buku itu agar menjadi barcode baru
 
-tambah buku tambah inputan jumlah buku untuk looping data buku
+tambah buku tambah inputan jumlah buku untuk looping data buku V
 
-tombol naik kelas untuk siswa
+tombol naik kelas untuk siswa : 
 
 filter kelas siswa nama bt checkbox
 
 edit dan update buku by kode buku
 
 tambah stok buku dengan cara(stok lama di hapus dinganti stok baru,start dari stok lama + stok baru)
+> menggunakan metode group dan mencari berdasarkan kd_buku yang sama : fitur tambah belum bisa dan akan dilanjutin besok
 
-pemilihan buku by modal tabel
+pemilihan buku by modal tabel : kurang jelas
 
 
-
-fitur experimental
-perbaikan import: setelah import kemudian mengambil semua data dan kemudian di generate menjadi banyak dengan melihat stok yang lebih dari 1 maka akan di duplicate dan setelah itu men delete yang lebih dari 1 tersebut
-
-cara 2= menggunakan for dengan cara merubah terus angka nya hingga null
 

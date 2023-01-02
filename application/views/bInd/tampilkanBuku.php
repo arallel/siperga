@@ -31,14 +31,14 @@
                     $id = $this->uri->segment(3);
                     $judul = $this->uri->segment(4);
                     $penerbit = $this->uri->segment(5);
-                    $stoknow = $this->db->get_where('buku_induk', ['kd_buku' => $id,'judul' => $judul,'penerbit' => $penerbit, 'keadaan' => "baik"])->num_rows();
+                    $stoknow = $this->db->get_where('buku_induk', ['kd_buku' => $id,'keadaan' => "baik"])->num_rows();
 ?>
                     <h5>Jumlah buku <?php echo $stoknow ?> </h5>
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
+                                <div class="card-body ">
+                                  <div class="table-responsive">
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
@@ -72,7 +72,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                  </div>
+                                    
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require_once APPPATH . "third_party/Spout/Autoloader/autoload.php";
+date_default_timezone_set('Asia/Jakarta');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -44,13 +45,16 @@ class Bukuinduk extends CI_Controller
         $spreadsheet = $reader->load('upload/files/' . $file['file_name']);
         $d = $spreadsheet->getSheet(0)->toArray();
         unset($d[0]);
-         foreach ($d as $t) {
+         foreach ($d as $t) {           
              $stoks = $t[13];
-               if ($stoks > 0) {
-                         for ($i = 1; $i <= $stoks; $i++) { 
+            //  var_dump($stoks);
+            if($t[2] == !null && $t[1] == !null && $t[13] == !null){
+             if ($stoks == 1) {
+                // echo " data = 1";
+                       $c = 1;
             $data["kd_buku"] = $t[1];
+            $data["no_buku"] = '1';
             $data["judul"] = $t[2];
-            $data["no_buku"] = $i;
             $data["pengarang"] = $t[3];
             $data["penerbit"] = $t[4];
             $data["kota_terbit"] = $t[5];
@@ -64,26 +68,28 @@ class Bukuinduk extends CI_Controller
              $data["stok"] = "1";
             $data["keadaan"] = "baik";
              $this->bInd->store($data);
+            } else {            
+                for ($i = 1; $i <= $stoks; $i++) { 
+                    $data["kd_buku"] = $t[1];
+                    $data["judul"] = $t[2];
+                    $data["no_buku"] = $i;
+                    $data["pengarang"] = $t[3];
+                    $data["penerbit"] = $t[4];
+                    $data["kota_terbit"] = $t[5];
+                    $data["tahun_terbit"] = $t[6];
+                    $data["ISBN"] = $t[7];
+                    $data["asal"] = $t[8];
+                    $data["klasifikasi"] = $t[9];
+                    $data["tgl_diterima"] = $t[10];
+                    $data["jenis"] = $t[11];
+                    $data["rak"] = $t[12];
+                     $data["stok"] = "1";
+                    $data["keadaan"] = "baik";
+                     $this->bInd->store($data);
                 }
-               } else {
-                $c = 1;
-                   $data["kd_buku"] = $t[1];
-            $data["judul"] = $t[2];
-            $data["no_buku"] = $c++;
-            $data["pengarang"] = $t[3];
-            $data["penerbit"] = $t[4];
-            $data["kota_terbit"] = $t[5];
-            $data["tahun_terbit"] = $t[6];
-            $data["ISBN"] = $t[7];
-            $data["asal"] = $t[8];
-            $data["klasifikasi"] = $t[9];
-            $data["tgl_diterima"] = $t[10];
-            $data["jenis"] = $t[11];
-            $data["rak"] = $t[12];
-             $data["stok"] = "0";
-            $data["keadaan"] = "baik";
-             $this->bInd->store($data);
                }
+            }
+
                
        
         }
@@ -227,7 +233,13 @@ class Bukuinduk extends CI_Controller
         $nama_file = 'Databuku ' . date('d-m-y');
     }
     
-    $format = $this->input->post('format');
+    $check = $this->input->post('format');
+    if($check == null)
+    {
+        $format = 'xlsx';
+    }else{
+        $format =  $this->input->post('format');
+    }
     // Proses file excel
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment; filename="'. $nama_file .'.'.$format.'"'); 
@@ -358,11 +370,11 @@ class Bukuinduk extends CI_Controller
         redirect('bukuinduk/tampilkan/'.$id.'/'.$judul.'/'.$penerbit);
     }
 
-    public function tampilkan($id,$judul,$penerbit)
+    public function tampilkan($id)
     {
-        // $data = $this->bInd->tampilkanBuku($id);
-        $data = $this->db->get_where('buku_induk', ['kd_buku' => $id,'judul' => $judul,'penerbit' => $penerbit, 'keadaan' => "baik"])->result_array();
+        $data = $this->bInd->tampilkanBuku($id);
         $generator = new Picqer\Barcode\BarcodeGeneratorSVG();
+        // var_dump($data);
         $this->load->view('bInd/tampilkanBuku', ['data' => $data, 'gen' => $generator]);
     }
 
@@ -377,12 +389,18 @@ class Bukuinduk extends CI_Controller
         $keadaan = $this->input->post('keadaan');
 
         $this->db->query("UPDATE buku_induk SET keadaan='$keadaan' WHERE kd_buku='$id' AND no_buku='$no'");
-        redirect('bukuinduk/tampilkan/'. $id);
+        redirect('bukuinduk/tampilkan/'.$id);
     }
     public function bukuRusak()
     {
-        $data = $this->db->query('SELECT * FROM buku_induk WHERE keadaan="rusak" || keadaan="hilang"')->result_array();
+        $data = $this->db->query('SELECT * FROM buku_induk WHERE keadaan="rusak"')->result_array();
         // var_dump($data);
         $this->load->view('bInd/bukuRusak', ['data' => $data]);
+    }
+    public function bukuHilang()
+    {
+        $data = $this->db->query('SELECT * FROM buku_induk WHERE keadaan="hilang"')->result_array();
+        // var_dump($data);
+        $this->load->view('bInd/bukuHilang', ['data' => $data]);
     }
 }

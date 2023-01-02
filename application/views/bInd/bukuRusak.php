@@ -21,12 +21,12 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Dashboard</h1>
+                        <h1>Buku Rusak</h1>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body row">
                                     <div class="table-responsive">
                                         <table class="table table-striped" id="table-1">
                                             <thead>
@@ -52,7 +52,6 @@
                                                         <td>
                                                            <?php echo $no++ ?>
                                                         </td>
-
                                                         <td><?php echo $buku['judul'] ?></td>
                                                         <td><?php echo $buku['pengarang'] ?></td>
                                                         <td><?php echo $buku['penerbit'] ?></td>

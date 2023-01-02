@@ -36,8 +36,27 @@
             <li class="<?php if($this->uri->uri_string() == 'home') { echo 'active'; } ?>"><a class="nav-link" href="<?php echo base_url('home') ?>"><i class="fas fa-globe"></i> <span>Dashboard</span></a></li>
 
             <li class="<?php if($this->uri->uri_string() == 'peminjaman') { echo 'active'; } ?>"><a class="nav-link" href="<?php echo base_url('peminjaman') ?>"><i class="fas fa-book"></i><span>Peminjaman Buku</span></a></li>
-
-            <li class="<?php if($this->uri->uri_string() == 'bukuinduk') { echo 'active'; } ?><?php if($this->uri->uri_string() == 'bukuinduk/create') { echo 'active'; } ?>"><a class="nav-link" href="<?php echo base_url('bukuinduk') ?>"><i class="fas fa-book-open"></i><span>Daftar Buku</span></a></li>
+            <li class="nav-item dropdown <?php if($this->uri->uri_string() == 'bukuinduk') { echo 'active'; } ?>
+            <?php if($this->uri->uri_string() == 'bukuinduk/bukuHilang') { echo 'active'; } ?>
+            <?php if($this->uri->uri_string() == 'bukuinduk/bukuRusak') { echo 'active'; } ?>">
+                <a href="#"
+                    class="nav-link has-dropdown"
+                    data-toggle="dropdown"><i class="fas fa-book-open"></i> <span>Buku</span></a>
+                <ul class="dropdown-menu">
+                    <li class="<?php if($this->uri->uri_string() == 'bukuinduk') { echo 'active'; } ?><?php if($this->uri->uri_string() == 'bukuinduk/create') { echo 'active'; } ?>">
+                        <a class="nav-link"
+                            href="<?php echo base_url('bukuinduk') ?>">Daftar Buku</a>
+                    </li>
+                    <li class="<?php if($this->uri->uri_string() == 'bukuinduk/bukuRusak') { echo 'active'; } ?>">
+                        <a class="nav-link"
+                            href="<?php echo base_url('bukuinduk/bukuRusak') ?>">Daftar Kondisi Buku Rusak</a>
+                    </li>
+                    <li class="<?php if($this->uri->uri_string() == 'bukuinduk/bukuHilang') { echo 'active'; } ?>">
+                        <a class="nav-link"
+                            href="<?php echo base_url('bukuinduk/bukuHilang') ?>">Daftar Kondisi Buku Hilang</a>
+                    </li>
+                </ul>
+            </li>
 
             <li class="<?php if($this->uri->uri_string() == 'peminjaman/riwayat') { echo 'active'; } ?>"><a class="nav-link" href="<?php echo base_url('peminjaman/riwayat') ?>"><i class="fas fa-book-open"></i><span>Riwayat Peminjaman</span></a></li>
 

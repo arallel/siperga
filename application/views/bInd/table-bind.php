@@ -66,7 +66,7 @@
                                                           <td><?php echo $buku['jenis'] ?></td>
                                                            <td><?php echo $buku['rak'] ?></td>
                                                         <td><?php echo $buku['tgl_diterima'] ?></td>
-                                                        <td class="d-flex"><button class="btn btn-info mr-3" onclick="window.location.href='<?php echo base_url('bukuinduk/detail/'. $buku['kd_buku']) ?>'">Detail</button><button class="btn btn-success mr-3" onclick="window.location.href='<?php echo base_url('bukuinduk/tampilkan/'.$buku['kd_buku'].'/'. $buku['judul'].'/'.$buku['penerbit']) ?>'">Tunjukan</button><button class="btn btn-warning mr-2" onclick="window.location.href='<?php echo base_url('bukuinduk/edit/'. $buku['kd_buku']) ?>'">Edit</button></td>
+                                                        <td class="d-flex"><button class="btn btn-info mr-3" onclick="window.location.href='<?php echo base_url('bukuinduk/detail/'. $buku['kd_buku']) ?>'">Detail</button><button class="btn btn-success mr-3" onclick="window.location.href='<?php echo base_url('bukuinduk/tampilkan/'.$buku['kd_buku']) ?>'">Tunjukan</button><button class="btn btn-warning mr-2" onclick="window.location.href='<?php echo base_url('bukuinduk/edit/'. $buku['kd_buku']) ?>'">Edit</button></td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -129,13 +129,13 @@
                                         <p>apabila tidak ingin menggunakan nama maka tidak perlu mengisi hanya mengisi format saja</p>
                                     </div>
                                     <div class="form-group">
-                                        <select class="form-control" name="format">
+                                        <select class="form-control" name="format" required>
                                             <option selected disabled>Format File</option>
                                             <option>csv</option>
                                             <option>xls</option>
                                             <option>xlsx</option>
                                         </select>
-                                        <p>Format Untuk File yang akan digunakan</p>
+                                        <p>Format Untuk File yang akan digunakan <br>Apabila Tidak Memilih format Maka akan menggunakan Format <b>.Xlsx</b></p>
                                     </div>
                                 </div>
                                
