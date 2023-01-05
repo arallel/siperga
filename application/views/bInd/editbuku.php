@@ -105,7 +105,7 @@
                                     <div class="col-3">
                                     <div class="form-group">
                                         <label>tgl_diterima</label>
-                                        <input type="date" name="tgl_diterima" value="<?php echo $data['tgl_diterima'] ?>" class="form-control" required>
+                                        <input type="date" name="tgl_diterima" value="<?php echo $data['tgl_diterima'] ?>" class="form-control" >
                                     </div>
                                     </div>
                                     </div>

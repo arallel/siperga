@@ -28,22 +28,19 @@ barcode buku V
 
 status buku rusak,hilang,bagus V
 
-bedakan tabel buku rusak dengan yang baik
+bedakan tabel buku rusak dengan yang baik V
 
-pilih buku (by judul buku dan by nomer buku)
+pilih buku (by judul buku dan by nomer buku) : tidak jelas
 
-barcode buku nomer belakangnya harus ada nomer urut buku itu agar menjadi barcode baru
+barcode buku nomer belakangnya harus ada nomer urut buku itu agar menjadi barcode baru V
 
 tambah buku tambah inputan jumlah buku untuk looping data buku V
 
-tombol naik kelas untuk siswa : 
+tombol naik kelas untuk siswa : tidak perlu
 
-filter kelas siswa nama bt checkbox
+filter kelas siswa nama bt checkbox : tidak perlu
 
-edit dan update buku by kode buku
-
-tambah stok buku dengan cara(stok lama di hapus dinganti stok baru,start dari stok lama + stok baru)
-> menggunakan metode group dan mencari berdasarkan kd_buku yang sama : fitur tambah belum bisa dan akan dilanjutin besok
+edit dan update buku by kode buku V
 
 pemilihan buku by modal tabel : kurang jelas
 

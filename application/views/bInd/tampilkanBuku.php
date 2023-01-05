@@ -31,7 +31,7 @@
                     $id = $this->uri->segment(3);
                     $judul = $this->uri->segment(4);
                     $penerbit = $this->uri->segment(5);
-                    $stoknow = $this->db->get_where('buku_induk', ['kd_buku' => $id,'keadaan' => "baik"])->num_rows();
+                    $stoknow = $this->db->get_where('buku_induk', ['kd_buku' => $id])->num_rows();
 ?>
                     <h5>Jumlah buku <?php echo $stoknow ?> </h5>
                     <div class="row">
@@ -61,9 +61,18 @@
                                                            <?php echo $no++ ?>
                                                         </td>
                                                         <td><?php echo $buku['judul'] ?></td>
-                                                        <td><?php echo $gen->getBarcode($buku['kd_buku'].$buku['no_buku'], $gen::TYPE_CODE_128,2, 50); ?></td>
+                                                        <td><?php echo $gen->getBarcode($buku['kd_buku'].'.No.'.$buku['no_buku'], $gen::TYPE_CODE_128,2, 50); ?></td>
                                                         <td><?php echo $buku['no_buku'] . ' / '. $stoknow ?></td>
-                                                       <td><?php echo $buku['keadaan']?></td>
+                                                       <td><span class="badge <?php if ($buku['keadaan'] == 'baik'){
+                                                             echo 'badge-success';
+                                                       }elseif ($buku['keadaan'] == 'rusak') {
+                                                           echo 'badge-warning';
+                                                       }elseif ($buku['keadaan'] == 'hilang') {
+                                                           echo 'badge-danger';
+                                                       }else{
+                                                        echo 'badge-secondary';
+                                                       } 
+                                                       ?>"><?php echo $buku['keadaan']?></span></td>
                                                         <td class="d-flex">
                                                             <a href="<?php echo base_url('bukuinduk/status/'. $buku['kd_buku'] . '?no='.$buku['no_buku']) ?>" class="btn btn-warning">Ubah Status</a>
                                                         </td>

@@ -40,6 +40,6 @@ class BukuIndukModel extends CI_Model
 
     public function tampilkanBuku($id)
     {
-        return $this->db->get_where('buku_induk', ['kd_buku' => $id, 'keadaan' => "baik", "stok" => 1])->result_array();
+        return $this->db->get_where('buku_induk', ['kd_buku' => $id, "stok" => 1])->result_array();
     }
 }

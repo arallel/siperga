@@ -45,32 +45,37 @@ class Bukuinduk extends CI_Controller
         $spreadsheet = $reader->load('upload/files/' . $file['file_name']);
         $d = $spreadsheet->getSheet(0)->toArray();
         unset($d[0]);
-         foreach ($d as $t) {           
-             $stoks = $t[13];
-            //  var_dump($stoks);
-            if($t[2] == !null && $t[1] == !null && $t[13] == !null){
-             if ($stoks == 1) {
-                // echo " data = 1";
-                       $c = 1;
-            $data["kd_buku"] = $t[1];
-            $data["no_buku"] = '1';
-            $data["judul"] = $t[2];
-            $data["pengarang"] = $t[3];
-            $data["penerbit"] = $t[4];
-            $data["kota_terbit"] = $t[5];
-            $data["tahun_terbit"] = $t[6];
-            $data["ISBN"] = $t[7];
-            $data["asal"] = $t[8];
-            $data["klasifikasi"] = $t[9];
-            $data["tgl_diterima"] = $t[10];
-            $data["jenis"] = $t[11];
-            $data["rak"] = $t[12];
-             $data["stok"] = "1";
-            $data["keadaan"] = "baik";
-             $this->bInd->store($data);
-            } else {            
-                for ($i = 1; $i <= $stoks; $i++) { 
-                    $data["kd_buku"] = $t[1];
+         foreach ($d as $t) {  
+         $stoks = $t[13];         
+            $datas = $this->db->get_where('buku_induk', ['kd_buku' => $t[1],'judul' => $t[2]])->num_rows();
+            $checkdataada =$this->db->get('buku_induk')->num_rows();
+            $counttotaldata = $t[13] - $datas;
+            if($checkdataada == 0){
+                if($t[2] == !null && $t[1] == !null && $t[13] == !null){
+                  if ($stoks == 1) {
+                    // echo 'data = memiliki 1 data<br>';
+                      $c = 1;
+                      $data["kd_buku"] = $t[1];
+                      $data["no_buku"] = '1';
+                      $data["judul"] = $t[2];
+                      $data["pengarang"] = $t[3];
+                      $data["penerbit"] = $t[4];
+                      $data["kota_terbit"] = $t[5];
+                      $data["tahun_terbit"] = $t[6];
+                      $data["ISBN"] = $t[7];
+                      $data["asal"] = $t[8];
+                      $data["klasifikasi"] = $t[9];
+                      $data["tgl_diterima"] = $t[10];
+                      $data["jenis"] = $t[11];
+                      $data["rak"] = $t[12];
+                      $data["stok"] = "1";
+                      $data["keadaan"] = "baik";
+                      $this->bInd->store($data);
+                  }elseif($stoks > 1){
+                    // echo 'data lebih dari 1 data<br>';
+                    for ($i = 1; $i <= $stoks; $i++) { 
+                       $data["kd_buku"] = $t[1];
+                         $data["kd_buku"] = $t[1];
                     $data["judul"] = $t[2];
                     $data["no_buku"] = $i;
                     $data["pengarang"] = $t[3];
@@ -86,15 +91,39 @@ class Bukuinduk extends CI_Controller
                      $data["stok"] = "1";
                     $data["keadaan"] = "baik";
                      $this->bInd->store($data);
+                    }
+                  }
                 }
-               }
+            }else{
+                 // echo 'apabila aktif maka akan menjalankan ini dikarenakan ada data di database <br>';
+                if($t[2] == !null && $t[1] == !null && $t[13] == !null){
+                   var_dump($counttotaldata);
+                   if($counttotaldata >= 1){
+                     for ($i=1; $i <= $counttotaldata; $i++) { 
+                         echo $i;
+                          $data["kd_buku"] = $t[1];
+                          $data["judul"] = $t[2];
+                          $data["no_buku"] = $i;
+                          $data["pengarang"] = $t[3];
+                          $data["penerbit"] = $t[4];
+                          $data["kota_terbit"] = $t[5];
+                          $data["tahun_terbit"] = $t[6];
+                          $data["ISBN"] = $t[7];
+                          $data["asal"] = $t[8];
+                          $data["klasifikasi"] = $t[9];
+                          $data["tgl_diterima"] = $t[10];
+                          $data["jenis"] = $t[11];
+                          $data["rak"] = $t[12];
+                           $data["stok"] = "1";
+                          $data["keadaan"] = "baik";
+                        $this->bInd->store($data);
+                     }
+                   }
+              }
             }
-
-               
-       
-        }
+       }
+      }
               redirect('bukuinduk');
-        }
     }
 
     public function export()
